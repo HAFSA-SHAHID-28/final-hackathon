@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+/* =========================================================
+   VERDANT NOIR — DESIGN SYSTEM
+   Quiet Luxury · Editorial · Minimal · Mature
+   ========================================================= */
+
+:root {
+  /* ---------- Core ---------- */
+  --color-bg: #f7f6f0;
+  --color-surface: #ffffff;
+
+  /* ---------- Olive ---------- */
+  --color-primary: #4f5540;
+  --color-primary-dark: #34382b;
+  --color-primary-light: #e9ebe3;
+
+  /* ---------- Antique Brass ---------- */
+  --color-accent: #a08d5b;
+  --color-accent-light: #f3eee2;
+
+  /* ---------- Typography ---------- */
+  --color-text: #272821;
+  --color-text-secondary: #5f6258;
+  --color-text-muted: #7a7c73;
+
+  /* ---------- Borders ---------- */
+  --color-border: #e4e2d8;
+  --color-border-dark: #d4d1c5;
+
+  /* ---------- Status ---------- */
+  --color-success: #58705a;
+  --color-success-light: #e8f0e8;
+
+  --color-danger: #a4574f;
+  --color-danger-light: #f7e9e7;
+
+  --color-warning: #9a783d;
+  --color-warning-light: #f6efdf;
+
+  /* ---------- Shadows ---------- */
+  --shadow-soft: 0 2px 12px rgba(39, 40, 33, 0.05);
+  --shadow-card: 0 4px 20px rgba(39, 40, 33, 0.06);
+  --shadow-modal: 0 20px 50px rgba(39, 40, 33, 0.12);
+
+  /* ---------- Border Radius ---------- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}
+
+
+/* =========================================================
+   TAILWIND DESIGN TOKENS
+   ========================================================= */
+
+@theme {
+  --color-brand: var(--color-primary);
+  --color-brand-dark: var(--color-primary-dark);
+  --color-brand-light: var(--color-primary-light);
+
+  --color-gold: var(--color-accent);
+  --color-gold-light: var(--color-accent-light);
+
+  --color-page: var(--color-bg);
+  --color-card: var(--color-surface);
+
+  --color-ink: var(--color-text);
+  --color-secondary: var(--color-text-secondary);
+  --color-muted: var(--color-text-muted);
+
+  --color-line: var(--color-border);
+  --color-line-dark: var(--color-border-dark);
+
+  --color-status-success: var(--color-success);
+  --color-status-danger: var(--color-danger);
+  --color-status-warning: var(--color-warning);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}
+
+
+/* =========================================================
+   GLOBAL BASE
+   ========================================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+
+/* =========================================================
+   TEXT SELECTION
+   ========================================================= */
+
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+}
