@@ -1,0 +1,5 @@
+[
+  { "name": "Rohama", "email": "rohama@example.com", "password": "Worker@123", "serviceCategories": ["Teaching", "Tutoring"], "ratingAverage": 4.9, "ratingCount": 18 },
+  { "name": "Hira", "email": "hira@example.com", "password": "Worker@123", "serviceCategories": ["Teaching", "Technical"], "ratingAverage": 4.7, "ratingCount": 12 },
+  { "name": "Tayyaba", "email": "tayyaba@example.com", "password": "Worker@123", "serviceCategories": ["Teaching", "Design"], "ratingAverage": 4.6, "ratingCount": 9 }
+]

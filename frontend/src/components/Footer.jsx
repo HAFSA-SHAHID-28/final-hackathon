@@ -6,7 +6,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const footerLinks = [
   { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
+  { name: "Dashboard", path: "/dashboard" },
 ];
 
 const Footer = () => {
@@ -23,11 +23,11 @@ const Footer = () => {
                 <div className="h-2 w-2 rounded-full bg-brand" />
               </div>
               <span className="text-sm font-semibold tracking-[0.15em] text-ink uppercase">
-                Verdant Noir
+                SupportFlow
               </span>
             </div>
             <p className="text-sm text-muted leading-relaxed max-w-xs">
-              Built with quiet precision for the MERN Hackathon.
+              Thoughtful service requests, real people, and clear progress.
             </p>
           </div>
 
@@ -57,7 +57,7 @@ const Footer = () => {
             </h3>
             <div className="flex items-center gap-4">
               <a
-                href="mailto:hello@example.com"
+                href="mailto:hafsa.shahid.dev@gmail.com"
                 aria-label="Email"
                 className="h-9 w-9 flex items-center justify-center rounded-full border border-line text-secondary hover:text-brand hover:border-brand transition-colors"
               >
@@ -65,7 +65,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="https://github.com"
+                href="https://github.com/HAFSA-SHAHID-28"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -75,7 +75,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/hafsa-shahid-dev/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"

@@ -1,21 +1,32 @@
-import { Navigate } from "react-router-dom";
-import { isAuthorized, getUser } from "../utils/auth";
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const ProtectedRoutes = ({ children, role }) => {
+  const { user, loading } = useAuth();
+  const location = useLocation();
 
-  const loggedIn = isAuthorized();
-  const user = getUser();
-
-  const hasRequiredRole = role
-    ? user?.role === role
-    : true;
-
-  if (!loggedIn) {
-    return <Navigate to="/auth" replace />;
+  if (loading) {
+    return (
+      <div className="flex min-h-[60vh] items-center justify-center bg-page">
+        <div className="text-sm text-muted">
+          Loading workspace...
+        </div>
+      </div>
+    );
   }
 
-  if (!hasRequiredRole) {
-    return <Navigate to="/" replace />;
+  if (!user) {
+    return (
+      <Navigate
+        to="/auth"
+        replace
+        state={{ from: location.pathname }}
+      />
+    );
+  }
+
+  if (role && user.role !== role) {
+    return <Navigate to="/dashboard" replace />;
   }
 
   return children;

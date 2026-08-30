@@ -27,11 +27,12 @@ export const signUp = async (req, res) => {
       });
     }
 
-    const user = await User.create({
-      name,
-      email,
-      password,
-    });
+  const user = await User.create({
+  name,
+  email,
+  password,
+  role: "customer",
+});
 
     const token = signInToken(user);
 
@@ -66,22 +67,21 @@ export const signIn = async (req, res) => {
         message: "Email and password are required",
       });
     }
+const user = await User.findOne({ email });
 
-    const user = await User.findOne({ email });
+if (!user) {
+  return res.status(401).json({
+    success: false,
+    message: "Invalid email or password",
+  });
+}
 
-    if (user.status === "block") {
+if (user.status === "block") {
   return res.status(403).json({
     success: false,
     message: "Your account has been blocked",
   });
 }
-
-    if (!user) {
-      return res.status(401).json({
-        success: false,
-        message: "Invalid email or password",
-      });
-    }
 
     const isPasswordCorrect = await user.comparePassword(password);
 

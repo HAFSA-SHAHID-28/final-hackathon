@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      lowercase: true
+      lowercase: true,
     },
 
     password: {
@@ -24,14 +24,19 @@ const userSchema = new mongoose.Schema(
 
     role: {
       type: String,
-      enum: ["user", "admin"],
-      default: "user",
+      enum: ["customer", "worker", "admin"],
+      default: "customer",
     },
+
+    serviceCategories: { type: [String], default: [] },
+    ratingAverage: { type: Number, default: 0, min: 0, max: 5 },
+    ratingCount: { type: Number, default: 0, min: 0 },
+
     status: {
-        type: String,
-        enum: ['active', 'block'],
-        default: 'active'
-    }
+      type: String,
+      enum: ["active", "block"],
+      default: "active",
+    },
   },
   {
     timestamps: true,
@@ -50,6 +55,6 @@ userSchema.methods.comparePassword = function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("User", userSchema);
 
 export default User;

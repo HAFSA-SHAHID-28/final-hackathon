@@ -1,27 +1,29 @@
-// frontend/src/components/Navbar.jsx
-
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { HiMenu, HiX } from "react-icons/hi";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+
+import {
+  HiMenu,
+  HiX,
+} from "react-icons/hi";
+
 import { useAuth } from "../context/AuthContext";
 
-const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-];
-
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
+  const [isOpen, setIsOpen] =
+    useState(false);
 
-  const handleAuthClick = () => {
+  const { user, logout } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const goDashboard = () => {
     setIsOpen(false);
-    if (user) {
-      navigate("/dashboard");
-    } else {
-      navigate("/auth");
-    }
+    navigate("/dashboard");
   };
 
   const handleLogout = () => {
@@ -30,112 +32,134 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const isDashboard =
+    location.pathname === "/dashboard";
+
   return (
-    <header className="sticky top-0 z-50 bg-card border-b border-line">
-      <nav className="max-w-6xl mx-auto px-5 md:px-8">
-        <div className="flex items-center justify-between h-16">
+    <header className="sticky top-0 z-50 border-b border-line bg-card">
+      <nav className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="flex h-16 items-center justify-between">
           {/* Brand */}
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="h-7 w-7 rounded-full border border-line flex items-center justify-center">
+          <Link
+            to="/"
+            className="flex items-center gap-2.5"
+            onClick={() =>
+              setIsOpen(false)
+            }
+          >
+            <div className="flex h-7 w-7 items-center justify-center rounded-full border border-line">
               <div className="h-2 w-2 rounded-full bg-brand" />
             </div>
-            <span className="text-sm font-semibold tracking-[0.15em] text-ink uppercase">
-              Verdant Noir
+
+            <span className="text-sm font-semibold uppercase tracking-[0.15em] text-ink">
+              SupportFlow
             </span>
           </Link>
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className="text-sm text-secondary hover:text-ink transition-colors"
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Desktop auth area */}
-          <div className="hidden md:flex items-center gap-4">
+          {/* Desktop */}
+          <div className="hidden items-center gap-4 md:flex">
             {user ? (
               <>
-                <span className="text-sm text-muted">{user.name}</span>
+                <div className="text-right">
+                  <p className="text-sm font-semibold text-ink">
+                    {user.name}
+                  </p>
+
+                  <p className="text-xs capitalize text-muted">
+                    {user.role}
+                  </p>
+                </div>
+
+                {!isDashboard && (
+                  <button
+                    type="button"
+                    onClick={goDashboard}
+                    className="px-3 py-2 text-sm font-medium text-secondary transition hover:text-ink"
+                  >
+                    Dashboard
+                  </button>
+                )}
+
                 <button
-                  onClick={handleAuthClick}
-                  className="text-sm text-secondary hover:text-ink transition-colors"
-                >
-                  Dashboard
-                </button>
-                <button
+                  type="button"
                   onClick={handleLogout}
-                  className="px-4 py-2 text-sm font-medium text-card bg-brand rounded-md hover:bg-brand-dark transition-colors"
+                  className="rounded-md bg-brand px-4 py-2 text-sm font-medium text-card transition hover:bg-brand-dark"
                 >
                   Logout
                 </button>
               </>
             ) : (
-              <button
-                onClick={handleAuthClick}
-                className="px-4 py-2 text-sm font-medium text-card bg-brand rounded-md hover:bg-brand-dark transition-colors"
+              <Link
+                to="/auth"
+                className="rounded-md bg-brand px-4 py-2 text-sm font-medium text-card transition hover:bg-brand-dark"
               >
                 Sign In
-              </button>
+              </Link>
             )}
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Mobile */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-ink"
+            type="button"
+            onClick={() =>
+              setIsOpen((value) => !value)
+            }
+            className="text-ink md:hidden"
             aria-label="Toggle menu"
           >
-            {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
+            {isOpen ? (
+              <HiX size={24} />
+            ) : (
+              <HiMenu size={24} />
+            )}
           </button>
         </div>
       </nav>
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden border-t border-line bg-card px-5 py-4 space-y-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              onClick={() => setIsOpen(false)}
-              className="block py-2.5 text-sm text-secondary hover:text-ink transition-colors"
-            >
-              {link.name}
-            </Link>
-          ))}
+        <div className="border-t border-line bg-card px-5 py-4 md:hidden">
+          {user ? (
+            <div className="space-y-2">
+              <div className="rounded-md bg-page p-3">
+                <p className="text-sm font-semibold">
+                  {user.name}
+                </p>
 
-          <div className="pt-3 mt-2 border-t border-line">
-            {user ? (
-              <>
-                <p className="py-2 text-sm text-muted">{user.name}</p>
+                <p className="mt-1 text-xs capitalize text-muted">
+                  {user.role}
+                </p>
+              </div>
+
+              {!isDashboard && (
                 <button
-                  onClick={handleAuthClick}
-                  className="block w-full text-left py-2.5 text-sm text-secondary hover:text-ink transition-colors"
+                  type="button"
+                  onClick={goDashboard}
+                  className="w-full rounded-md px-3 py-2.5 text-left text-sm text-secondary hover:bg-page hover:text-ink"
                 >
                   Dashboard
                 </button>
-                <button
-                  onClick={handleLogout}
-                  className="mt-2 w-full py-2.5 text-sm font-medium text-card bg-brand rounded-md hover:bg-brand-dark transition-colors"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
+              )}
+
               <button
-                onClick={handleAuthClick}
-                className="w-full py-2.5 text-sm font-medium text-card bg-brand rounded-md hover:bg-brand-dark transition-colors"
+                type="button"
+                onClick={handleLogout}
+                className="w-full rounded-md bg-brand px-3 py-2.5 text-sm font-medium text-card"
               >
-                Sign In
+                Logout
               </button>
-            )}
-          </div>
+            </div>
+          ) : (
+            <Link
+              to="/auth"
+              onClick={() =>
+                setIsOpen(false)
+              }
+              className="block rounded-md bg-brand px-3 py-2.5 text-center text-sm font-medium text-card"
+            >
+              Sign In
+            </Link>
+          )}
         </div>
       )}
     </header>
