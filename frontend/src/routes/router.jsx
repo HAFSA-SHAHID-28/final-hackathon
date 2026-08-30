@@ -7,7 +7,8 @@ import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
 import HomePage from "../pages/HomePage";
 import DashboardPage from "../pages/DashboardPage";
-
+import AboutPage from "../pages/AboutPage";
+import ServicesPage from "../pages/ServicesPage";
 import ProtectedRoutes from "../components/ProtectedRoutes";
 
 const router = createBrowserRouter([
@@ -33,6 +34,14 @@ const router = createBrowserRouter([
       {
         path: "/reset-password/:token",
         element: <ResetPasswordPage />,
+      },
+      {
+        path: "/about",
+        element: <AboutPage />,
+      },
+      {
+        path: "/services",
+        element: <ServicesPage />,
       },
 
       {
