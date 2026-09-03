@@ -62,7 +62,7 @@ const Navbar = () => {
             </div>
 
             <span className="text-sm font-semibold uppercase tracking-[0.15em] text-ink">
-              SupportFlow
+              VerdantNoir
             </span>
           </Link>
 

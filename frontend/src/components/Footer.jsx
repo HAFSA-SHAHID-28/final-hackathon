@@ -23,7 +23,7 @@ const Footer = () => {
                 <div className="h-2 w-2 rounded-full bg-brand" />
               </div>
               <span className="text-sm font-semibold tracking-[0.15em] text-ink uppercase">
-                SupportFlow
+                VerdantNoir
               </span>
             </div>
             <p className="text-sm text-muted leading-relaxed max-w-xs">
